@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Жаран — QR Menu + Sales Dashboard
 
-## Getting Started
+Ресторанд зориулсан QR цэс (захиалга өгөх боломжтой) болон эзэмшигчид зориулсан
+борлуулалтын dashboard. Next.js 16 (App Router) + Supabase (Postgres/Auth) + Tailwind CSS.
 
-First, run the development server:
+## Бүтэц
+
+- `/menu` — Хэрэглэгчийн цэс. QR-аар нээгдэнэ, нэвтрэх шаардлагагүй. Ангилал,
+  хайлт, сагс, захиалга илгээх боломжтой.
+- `/admin/login` — Админ нэвтрэх.
+- `/admin` — Хянах самбар: өнөөдөр/энэ сарын орлого, өсөлт/бууралт хувь,
+  сүүлийн 30 хоногийн график, топ 5 хоол.
+- `/admin/menu` — Ангилал/хоол нэмэх, засах, устгах, идэвхжүүлэх/идэвхгүй болгох.
+- `/admin/orders` — Захиалгын түүх, огноо/төлөвөөр шүүх, CSV экспорт.
+- `/admin/reports` — Сар сонгож дэлгэрэнгүй тайлан: ангилалаар орлогын
+  задаргаа, хамгийн их зарагдсан хоолнууд.
+
+## 1. Supabase төслөө үүсгэх
+
+1. [supabase.com](https://supabase.com) дээр шинэ төсөл (project) үүсгэ.
+2. Supabase Dashboard → **SQL Editor** руу орж `supabase/migrations/0001_init.sql`
+   файлын агуулгыг хуулж ажиллуул. Энэ нь дараах хүснэгтүүдийг үүсгэнэ:
+   `categories`, `menu_items`, `orders`, `order_items` — мөн Row Level Security
+   (RLS) policy-уудыг тохируулж, жишээ өгөгдөл (seed) нэмнэ.
+   - Нэвтрээгүй хэрэглэгч (QR уншуулсан зочин): цэс унших, захиалга үүсгэх л боломжтой.
+   - Нэвтэрсэн хэрэглэгч (админ/ажилтан): бүх мэдээллийг унших, засах, устгах эрхтэй.
+3. Supabase Dashboard → **Authentication → Users** руу орж, ресторан
+   эзэмшигчид/ажилтанд зориулж email/password хэрэглэгч гараар нэмнэ
+   (эсвэл "Invite user"). Энэ систем нь нэг байгууллагад зориулагдсан тул
+   бүх бүртгэлтэй хэрэглэгч admin эрхтэй гэж үзнэ.
+4. Dashboard → **Project Settings → API** хэсгээс `Project URL` болон
+   `anon public` key-г ав.
+
+## 2. Орчны хувьсагч (environment variables)
+
+`.env.local.example`-г хуулж `.env.local` үүсгээд утгуудыг оруул:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.local.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 3. Локал ажиллуулах
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+[http://localhost:3000](http://localhost:3000) нээхэд `/menu` рүү автоматаар шилждэг.
+Админ хэсэгт [http://localhost:3000/admin/login](http://localhost:3000/admin/login)-с нэвтэрнэ.
 
-To learn more about Next.js, take a look at the following resources:
+## 4. Менюгээ шинэчлэх
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Админ самбараар (хамгийн хялбар):** `/admin/menu` руу нэвтэрч ангилал/хоол
+  нэмэх, засах, үнэ өөрчлөх, идэвхгүй болгох боломжтой. Өөрчлөлт шууд `/menu`
+  дээр харагдана.
+- **Брэндийн өнгө/нэр:** `src/lib/restaurant.ts` файл дахь `name`, `logo`,
+  `colors.primary`, `colors.secondary` утгыг өөрчил — бүх апп даяар CSS
+  хувьсагчаар дамжин шинэчлэгдэнэ.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 5. QR код үүсгэх
 
-## Deploy on Vercel
+Deploy хийсний дараа менюгийн URL-аа QR болгож үүсгэ:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run generate-qr -- https://your-restaurant.vercel.app/menu
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`public/menu-qr.png` файлд хадгалагдана — үүнийгээ хэвлэж ширээн дээр байрлуул.
+Олон ширээнд нэг л QR ашиглаж болно (`table_number`-г захиалга өгөх үедээ
+зочин гараар бичнэ), эсвэл ширээ тус бүрт өөр URL (`?table=5`) үүсгэж болно.
+
+## 6. Vercel дээр deploy хийх
+
+1. Энэ repo-г GitHub дээр push хийгээд [vercel.com/new](https://vercel.com/new)-ээр импорт хий.
+2. Vercel project settings → Environment Variables хэсэгт
+   `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`-г нэм.
+3. Deploy хийсний дараа бодит URL-аараа дахин QR код үүсгэ (алхам 5).
+
+## Мэдээллийн бүтэц (Supabase schema)
+
+```
+categories        (id, name, sort_order)
+menu_items        (id, category_id, name, description, price, image_url, is_available, tags, sort_order)
+orders            (id, table_number, status, total_amount, created_at)
+order_items       (id, order_id, menu_item_id, quantity, price_at_order_time)
+```
+
+Тооцооллууд (`src/lib/data.ts`):
+
+- **Сарын орлого** = цуцлагдаагүй захиалгуудын `total_amount`-ийн нийлбэр, тухайн сард.
+- **Өсөлт/бууралт %** = (энэ сар − өмнөх сар) / өмнөх сар × 100.
+- **Хамгийн их зарагдсан** = `order_items.quantity`-ийн нийлбэрээр эрэмбэлсэн.
+- **Дундаж захиалгын үнэ** = сарын орлого / идэвхтэй захиалгын тоо.
+
+## Технологи
+
+- Next.js 16 (App Router, Server Actions, Proxy — Next 16-д Middleware-ийн
+  оронд `proxy.ts` нэртэй болсон)
+- Supabase (Postgres + Auth + Row Level Security)
+- Tailwind CSS v4 (mobile-first, CSS variable-аар брэндчилдэг)
+- Recharts (орлогын trend, ангилалын breakdown график)
+# jaranqr
