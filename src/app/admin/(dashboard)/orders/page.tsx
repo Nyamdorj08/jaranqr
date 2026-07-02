@@ -44,7 +44,7 @@ export default async function AdminOrdersPage({
 
       <form className="flex flex-wrap items-end gap-3 rounded-2xl border border-neutral-200 bg-white p-4">
         <div>
-          <label className="text-xs font-medium text-neutral-600">Эхлэх огноо</label>
+          <label className="text-xs font-medium text-neutral-700">Эхлэх огноо</label>
           <input
             type="date"
             name="from"
@@ -53,7 +53,7 @@ export default async function AdminOrdersPage({
           />
         </div>
         <div>
-          <label className="text-xs font-medium text-neutral-600">Дуусах огноо</label>
+          <label className="text-xs font-medium text-neutral-700">Дуусах огноо</label>
           <input
             type="date"
             name="to"
@@ -62,7 +62,7 @@ export default async function AdminOrdersPage({
           />
         </div>
         <div>
-          <label className="text-xs font-medium text-neutral-600">Төлөв</label>
+          <label className="text-xs font-medium text-neutral-700">Төлөв</label>
           <select
             name="status"
             defaultValue={status ?? ""}
@@ -84,7 +84,7 @@ export default async function AdminOrdersPage({
       <div className="overflow-x-auto rounded-2xl border border-neutral-200 bg-white">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-neutral-200 text-left text-xs text-neutral-500">
+            <tr className="border-b border-neutral-200 text-left text-xs text-neutral-600">
               <th className="px-4 py-2">Огноо</th>
               <th className="px-4 py-2">Ширээ</th>
               <th className="px-4 py-2">Хоолнууд</th>
@@ -95,11 +95,11 @@ export default async function AdminOrdersPage({
           <tbody>
             {orders.map((order) => (
               <tr key={order.id} className="border-b border-neutral-100 last:border-0">
-                <td className="whitespace-nowrap px-4 py-2 text-xs text-neutral-500">
+                <td className="whitespace-nowrap px-4 py-2 text-xs text-neutral-600">
                   {new Date(order.created_at).toLocaleString("mn-MN")}
                 </td>
                 <td className="px-4 py-2">{order.table_number ?? "—"}</td>
-                <td className="max-w-xs px-4 py-2 text-xs text-neutral-600">
+                <td className="max-w-xs px-4 py-2 text-xs text-neutral-700">
                   {order.order_items
                     .map((line) => `${line.menu_items?.name ?? "?"} x${line.quantity}`)
                     .join(", ")}
@@ -114,7 +114,7 @@ export default async function AdminOrdersPage({
             ))}
             {orders.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-neutral-500">
+                <td colSpan={5} className="px-4 py-8 text-center text-neutral-600">
                   Захиалга олдсонгүй.
                 </td>
               </tr>

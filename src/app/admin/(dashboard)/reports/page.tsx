@@ -42,17 +42,17 @@ export default async function AdminReportsPage({
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
         <div className="rounded-2xl border border-neutral-200 bg-white p-4">
-          <p className="text-xs text-neutral-500">Сарын нийт орлого</p>
+          <p className="text-xs text-neutral-600">Сарын нийт орлого</p>
           <p className="mt-1 text-lg font-semibold text-brand-secondary">
             {report.totalRevenue.toLocaleString()}₮
           </p>
         </div>
         <div className="rounded-2xl border border-neutral-200 bg-white p-4">
-          <p className="text-xs text-neutral-500">Захиалгын тоо</p>
+          <p className="text-xs text-neutral-600">Захиалгын тоо</p>
           <p className="mt-1 text-lg font-semibold text-brand-secondary">{report.orderCount}</p>
         </div>
         <div className="rounded-2xl border border-neutral-200 bg-white p-4">
-          <p className="text-xs text-neutral-500">Дундаж захиалга</p>
+          <p className="text-xs text-neutral-600">Дундаж захиалга</p>
           <p className="mt-1 text-lg font-semibold text-brand-secondary">
             {report.orderCount === 0
               ? "0₮"
@@ -70,7 +70,7 @@ export default async function AdminReportsPage({
         <div className="rounded-2xl border border-neutral-200 bg-white p-4">
           <h2 className="mb-3 text-sm font-semibold text-neutral-700">Хамгийн их зарагдсан хоол</h2>
           {report.bestSellers.length === 0 ? (
-            <p className="text-sm text-neutral-500">Энэ сард захиалга алга байна.</p>
+            <p className="text-sm text-neutral-600">Энэ сард захиалга алга байна.</p>
           ) : (
             <ul className="divide-y divide-neutral-100">
               {report.bestSellers.map((item, index) => (
@@ -83,7 +83,7 @@ export default async function AdminReportsPage({
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-semibold">{item.quantity} ширхэг</p>
-                    <p className="text-xs text-neutral-500">{item.revenue.toLocaleString()}₮</p>
+                    <p className="text-xs text-neutral-600">{item.revenue.toLocaleString()}₮</p>
                   </div>
                 </li>
               ))}

@@ -11,7 +11,7 @@ export default async function AdminDashboardPage() {
     metrics.growthPct === null ? "—" : `${metrics.growthPct >= 0 ? "+" : ""}${metrics.growthPct.toFixed(1)}%`;
   const growthColor =
     metrics.growthPct === null
-      ? "text-neutral-500"
+      ? "text-neutral-600"
       : metrics.growthPct >= 0
         ? "text-green-600"
         : "text-red-600";
@@ -41,7 +41,7 @@ export default async function AdminDashboardPage() {
       <div className="rounded-2xl border border-neutral-200 bg-white p-4">
         <h2 className="mb-3 text-sm font-semibold text-neutral-700">Хамгийн их зарагдсан 5 хоол</h2>
         {metrics.topItems.length === 0 ? (
-          <p className="text-sm text-neutral-500">Энэ сард захиалга алга байна.</p>
+          <p className="text-sm text-neutral-600">Энэ сард захиалга алга байна.</p>
         ) : (
           <ul className="divide-y divide-neutral-100">
             {metrics.topItems.map((item, index) => (
@@ -54,7 +54,7 @@ export default async function AdminDashboardPage() {
                 </div>
                 <div className="text-right">
                   <p className="text-sm font-semibold">{item.quantity} ширхэг</p>
-                  <p className="text-xs text-neutral-500">{formatMnt(item.revenue)}</p>
+                  <p className="text-xs text-neutral-600">{formatMnt(item.revenue)}</p>
                 </div>
               </li>
             ))}
@@ -76,7 +76,7 @@ function MetricCard({
 }) {
   return (
     <div className="rounded-2xl border border-neutral-200 bg-white p-4">
-      <p className="text-xs text-neutral-500">{label}</p>
+      <p className="text-xs text-neutral-600">{label}</p>
       <p className={`mt-1 text-lg font-semibold ${valueClassName ?? "text-brand-secondary"}`}>
         {value}
       </p>

@@ -25,7 +25,7 @@ export function MenuItemRow({ item }: { item: MenuItem }) {
             name="name"
             defaultValue={item.name}
             placeholder="Нэр"
-            className="rounded-lg border border-neutral-300 px-2 py-1.5 text-sm"
+            className="rounded-lg border border-neutral-300 px-2 py-1.5 text-sm text-gray-900"
           />
           <input
             name="price"
@@ -33,7 +33,7 @@ export function MenuItemRow({ item }: { item: MenuItem }) {
             step="1"
             defaultValue={item.price}
             placeholder="Үнэ"
-            className="rounded-lg border border-neutral-300 px-2 py-1.5 text-sm"
+            className="rounded-lg border border-neutral-300 px-2 py-1.5 text-sm text-gray-900"
           />
         </div>
         <textarea
@@ -41,19 +41,19 @@ export function MenuItemRow({ item }: { item: MenuItem }) {
           defaultValue={item.description}
           placeholder="Тайлбар"
           rows={2}
-          className="w-full rounded-lg border border-neutral-300 px-2 py-1.5 text-sm"
+          className="w-full rounded-lg border border-neutral-300 px-2 py-1.5 text-sm text-gray-900"
         />
         <input
           name="image_url"
           defaultValue={item.image_url ?? ""}
           placeholder="Зургийн URL"
-          className="w-full rounded-lg border border-neutral-300 px-2 py-1.5 text-sm"
+          className="w-full rounded-lg border border-neutral-300 px-2 py-1.5 text-sm text-gray-900"
         />
         <input
           name="tags"
           defaultValue={item.tags.join(", ")}
           placeholder="Шошго (жишээ: new, popular)"
-          className="w-full rounded-lg border border-neutral-300 px-2 py-1.5 text-sm"
+          className="w-full rounded-lg border border-neutral-300 px-2 py-1.5 text-sm text-gray-900"
         />
         <div className="flex gap-2">
           <button
@@ -79,15 +79,15 @@ export function MenuItemRow({ item }: { item: MenuItem }) {
     <div className="flex items-center justify-between gap-3 rounded-xl border border-neutral-200 p-3">
       <div className="min-w-0">
         <div className="flex items-center gap-2">
-          <p className="truncate text-sm font-medium">{item.name}</p>
+          <p className="truncate text-sm font-medium text-gray-900">{item.name}</p>
           {!item.is_available && (
-            <span className="shrink-0 rounded-full bg-neutral-200 px-2 py-0.5 text-[10px] font-medium text-neutral-600">
+            <span className="shrink-0 rounded-full bg-neutral-200 px-2 py-0.5 text-[10px] font-medium text-neutral-700">
               Идэвхгүй
             </span>
           )}
         </div>
-        <p className="truncate text-xs text-neutral-500">{item.description}</p>
-        <p className="text-xs font-semibold">{item.price.toLocaleString()}₮</p>
+        <p className="truncate text-xs text-gray-700">{item.description}</p>
+        <p className="text-xs font-semibold text-gray-900">{item.price.toLocaleString()}₮</p>
       </div>
       <div className="flex shrink-0 items-center gap-1.5">
         <button

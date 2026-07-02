@@ -104,7 +104,7 @@ export function MenuBrowser({ categories }: { categories: CategoryWithItems[] })
 
       <div className="flex-1 px-4 py-4 grid grid-cols-1 gap-3 pb-28">
         {visibleItems.length === 0 && (
-          <p className="text-center text-neutral-500 py-10">Илэрц олдсонгүй.</p>
+          <p className="text-center text-neutral-600 py-10">Илэрц олдсонгүй.</p>
         )}
         {visibleItems.map((item) => (
           <MenuItemCard
@@ -133,19 +133,19 @@ export function MenuBrowser({ categories }: { categories: CategoryWithItems[] })
           <div className="rounded-t-3xl bg-white p-4 max-h-[85vh] flex flex-col">
             <div className="flex items-center justify-between pb-3 border-b border-neutral-200">
               <h2 className="text-lg font-semibold">Таны сагс</h2>
-              <button onClick={() => setCartOpen(false)} className="text-neutral-500 text-sm">
+              <button onClick={() => setCartOpen(false)} className="text-neutral-600 text-sm">
                 Хаах
               </button>
             </div>
             <div className="flex-1 overflow-y-auto divide-y divide-neutral-100">
               {cartLines.length === 0 && (
-                <p className="py-8 text-center text-neutral-500">Сагс хоосон байна</p>
+                <p className="py-8 text-center text-neutral-600">Сагс хоосон байна</p>
               )}
               {cartLines.map(({ item, quantity }) => (
                 <div key={item.id} className="flex items-center justify-between py-3">
                   <div>
                     <p className="font-medium text-sm">{item.name}</p>
-                    <p className="text-xs text-neutral-500">{item.price.toLocaleString()}₮</p>
+                    <p className="text-xs text-neutral-600">{item.price.toLocaleString()}₮</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <button
@@ -241,7 +241,7 @@ function MenuItemCard({
               </span>
             ))}
           </div>
-          <p className="text-xs text-neutral-500 line-clamp-2 mt-0.5">{item.description}</p>
+          <p className="text-xs text-neutral-600 line-clamp-2 mt-0.5">{item.description}</p>
         </div>
         <div className="flex items-center justify-between mt-2">
           <span className="font-semibold text-sm">{item.price.toLocaleString()}₮</span>

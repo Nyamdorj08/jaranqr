@@ -14,11 +14,11 @@ export default function AdminLoginPage() {
         className="w-full max-w-sm rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm"
       >
         <h1 className="text-lg font-semibold text-brand-secondary">{restaurant.name}</h1>
-        <p className="mt-1 text-sm text-neutral-500">Админ хэсэгт нэвтрэх</p>
+        <p className="mt-1 text-sm text-neutral-600">Админ хэсэгт нэвтрэх</p>
 
         <div className="mt-5 space-y-3">
           <div>
-            <label htmlFor="email" className="text-xs font-medium text-neutral-600">
+            <label htmlFor="email" className="text-xs font-medium text-neutral-700">
               И-мэйл
             </label>
             <input
@@ -31,7 +31,7 @@ export default function AdminLoginPage() {
             />
           </div>
           <div>
-            <label htmlFor="password" className="text-xs font-medium text-neutral-600">
+            <label htmlFor="password" className="text-xs font-medium text-neutral-700">
               Нууц үг
             </label>
             <input

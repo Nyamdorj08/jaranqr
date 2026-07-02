@@ -10,7 +10,7 @@ export function CategoryBreakdownChart({
   data: { category: string; revenue: number; pct: number }[];
 }) {
   if (data.length === 0) {
-    return <p className="py-10 text-center text-sm text-neutral-500">Дата алга байна.</p>;
+    return <p className="py-10 text-center text-sm text-neutral-600">Дата алга байна.</p>;
   }
 
   return (

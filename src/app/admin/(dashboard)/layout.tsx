@@ -25,7 +25,7 @@ export default async function AdminDashboardLayout({
       <aside className="border-b border-neutral-200 bg-white md:w-56 md:shrink-0 md:border-b-0 md:border-r">
         <div className="px-4 py-4">
           <p className="font-semibold text-brand-secondary">{restaurant.name}</p>
-          <p className="text-xs text-neutral-500">Админ самбар</p>
+          <p className="text-xs text-neutral-600">Админ самбар</p>
         </div>
         <nav className="flex gap-1 overflow-x-auto px-2 pb-2 md:flex-col md:overflow-visible md:px-3 md:pb-4">
           {NAV_ITEMS.map((item) => (
@@ -39,7 +39,7 @@ export default async function AdminDashboardLayout({
           ))}
         </nav>
         <div className="border-t border-neutral-200 px-4 py-3 md:mt-auto">
-          <p className="truncate text-xs text-neutral-500">{user?.email}</p>
+          <p className="truncate text-xs text-neutral-600">{user?.email}</p>
           <form action={logout}>
             <button type="submit" className="mt-1 text-sm font-medium text-brand-primary">
               Гарах
